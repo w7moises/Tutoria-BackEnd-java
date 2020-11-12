@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.Informe;
+import com.example.entity.Membresia;
 import com.example.service.InformeService;
 import com.example.util.Message;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,16 @@ public class InformeController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateInforme(@PathVariable("id") Long id, @RequestBody Informe informe) {
+        informe.setId(id);
+        Informe informeUpdated = informeService.updateInforme(informe);
+        if (informeUpdated == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(informe);
     }
 
     @PostMapping
